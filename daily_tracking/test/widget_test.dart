@@ -37,5 +37,60 @@ void main() {
     expect(find.widgetWithIcon(FlatButton, Icons.sentiment_very_satisfied), findsOneWidget);  
   });
 
+  //clicking button hits db
+  //db class -> abstract track
+    //track smileys
+  
+  testWidgets('hit face calls save on database with icon name', (WidgetTester tester) async {
+    //Arrange    
+    var dataStore = new FakeDataStore();
+    var clickLogger = new ClickLogger(dataStore: dataStore);
+    //Act
+    //No act because starting the app is the act itself. 
+    await tester.pumpWidget(new TrackerApp());
 
+    await tester.tap(find.byIcon(Icons.sentiment_very_satisfied));
+    await tester.pump();
+
+    var searchTerm = Icons.sentiment_very_satisfied.toString();
+    print('--------------------------------------------------------------------' + searchTerm);
+    print('dataStore.store: ' + dataStore.store);
+    var result = dataStore.store.contains(Icons.sentiment_very_satisfied.toString());
+
+
+    expect(true, result);  
+
+  });
+
+  test('Click smiley triggers save', () {
+    //repeat above test without UI 
+    //test datastore.put()
+  });
+ 
+  test("SmileyPage exists", () {
+    var smileyPage = new SmileyPage();
+    var smileyPageState = smileyPage.createState(); 
+
+    //expect(true, smileyPageState is smileyPage.createState())
+    var result = false;//smileyPageState is SmileyPageState;
+    expect(true, result);
+  });
+
+}
+
+class FakeDataStore implements DataStore {
+  
+  FakeDataStore(){
+
+  }
+  var store = '';
+  @override
+  put(Icon icon) {
+      // TODO: implement put
+      store += icon.toString();
+    }
+
+  contains(String str){
+    return store.contains(str);
+  }
 }

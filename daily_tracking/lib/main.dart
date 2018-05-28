@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 void main() => runApp(new TrackerApp());
 
 class TrackerApp extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -14,30 +15,61 @@ class TrackerApp extends StatelessWidget {
   }
 }
 
-class SmileyPage extends StatefulWidget {
+class SmileyPage extends StatefulWidget {  
   @override
   _SmileyPageState createState() => new _SmileyPageState();
 }
 
 class _SmileyPageState extends State<SmileyPage> {
+  DataStore dataStore = new DataStore();
+  var clickLogger = new ClickLogger(dataStore);
+
   @override
   Widget build(BuildContext context){
     return new Scaffold(
       body: new Center(
         child: new ListView(
         children: <Widget>[
-          new FlatButton(onPressed: null, child: new Icon(Icons.sentiment_very_satisfied),),
+          new FlatButton(
+            onPressed: () => clickLogger.logSmileyClick(Icon(Icons.sentiment_very_satisfied)), 
+            child: new Icon(Icons.sentiment_very_satisfied),),
           new FlatButton(onPressed: null, child: new Icon(Icons.sentiment_satisfied),),
           new FlatButton(onPressed: null, child: new Icon(Icons.sentiment_dissatisfied),),
           new FlatButton(onPressed: null, child: new Icon(Icons.sentiment_very_dissatisfied),)
         ],
       ),
-      ),
+    ),
       
     );
   }
 }
 
+class ClickLogger {
+  DataStore dataStore;
+  
+  ClickLogger(DataStore dataStore){
+    dataStore = dataStore; 
+  
+  }
+
+  logSmileyClick(Icon icon){
+    dataStore.put(icon);
+  }
+}
+
+class DataStore {
+  DataStore () {
+    //save to firebase
+  }
+
+  put(Icon icon){
+    _putInFirebase();  
+  }
+
+  _putInFirebase(){
+
+  }
+}
 
 // class MyApp extends StatelessWidget {
 //   // This widget is the root of your application.
