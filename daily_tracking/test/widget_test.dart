@@ -31,7 +31,7 @@ void main() {
     //Arrange    
     //Act
     //No act because starting the app is the act itself. 
-    await tester.pumpWidget(new TrackerApp());
+    await tester.pumpWidget(new TrackerApp(new DataStore()));
     
     //Assert
     expect(find.widgetWithIcon(FlatButton, Icons.sentiment_very_satisfied), findsOneWidget);  
@@ -44,10 +44,10 @@ void main() {
   testWidgets('hit face calls save on database with icon name', (WidgetTester tester) async {
     //Arrange    
     var dataStore = new FakeDataStore();
-    var clickLogger = new ClickLogger(dataStore: dataStore);
+    //var clickLogger = new ClickLogger(dataStore);
     //Act
     //No act because starting the app is the act itself. 
-    await tester.pumpWidget(new TrackerApp());
+    await tester.pumpWidget(new TrackerApp(dataStore));
 
     await tester.tap(find.byIcon(Icons.sentiment_very_satisfied));
     await tester.pump();
@@ -68,7 +68,7 @@ void main() {
   });
  
   test("SmileyPage exists", () {
-    var smileyPage = new SmileyPage();
+    var smileyPage = new SmileyPage(new DataStore());
     var smileyPageState = smileyPage.createState(); 
 
     //expect(true, smileyPageState is smileyPage.createState())
@@ -80,9 +80,8 @@ void main() {
 
 class FakeDataStore implements DataStore {
   
-  FakeDataStore(){
+  FakeDataStore();
 
-  }
   var store = '';
   @override
   put(Icon icon) {

@@ -1,74 +1,94 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(new TrackerApp());
+void main() => runApp(new TrackerApp(new DataStore()));
 
 class TrackerApp extends StatelessWidget {
-  
+  final DataStore dataStore;
+
+  TrackerApp(DataStore dataStore) : dataStore = dataStore {}
+
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'Put in mood goddammit!!!',
       theme: new ThemeData(),
-      home: new SmileyPage(),
+      home: new SmileyPage(dataStore),
     );
-      
   }
 }
 
-class SmileyPage extends StatefulWidget {  
+class SmileyPage extends StatefulWidget {
+  final DataStore dataStore;
+
+  SmileyPage(DataStore dataStore) : dataStore = dataStore;
+
   @override
-  _SmileyPageState createState() => new _SmileyPageState();
+  _SmileyPageState createState() => new _SmileyPageState(dataStore);
 }
 
 class _SmileyPageState extends State<SmileyPage> {
-  DataStore dataStore = new DataStore();
-  var clickLogger = new ClickLogger(dataStore);
+  DataStore dataStore;
+  ClickLogger clickLogger;
+
+  _SmileyPageState(DataStore dataStore) {
+      dataStore = dataStore;
+      clickLogger = new ClickLogger(dataStore);
+  }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return new Scaffold(
       body: new Center(
         child: new ListView(
-        children: <Widget>[
-          new FlatButton(
-            onPressed: () => clickLogger.logSmileyClick(Icon(Icons.sentiment_very_satisfied)), 
-            child: new Icon(Icons.sentiment_very_satisfied),),
-          new FlatButton(onPressed: null, child: new Icon(Icons.sentiment_satisfied),),
-          new FlatButton(onPressed: null, child: new Icon(Icons.sentiment_dissatisfied),),
-          new FlatButton(onPressed: null, child: new Icon(Icons.sentiment_very_dissatisfied),)
-        ],
+          children: <Widget>[
+            new FlatButton(
+              onPressed: () => clickLogger
+                  .logSmileyClick(Icon(Icons.sentiment_very_satisfied)),
+              child: new Icon(Icons.sentiment_very_satisfied),
+            ),
+            new FlatButton(
+              onPressed: null,
+              child: new Icon(Icons.sentiment_satisfied),
+            ),
+            new FlatButton(
+              onPressed: null,
+              child: new Icon(Icons.sentiment_dissatisfied),
+            ),
+            new FlatButton(
+              onPressed: null,
+              child: new Icon(Icons.sentiment_very_dissatisfied),
+            )
+          ],
+        ),
       ),
-    ),
-      
     );
   }
 }
 
 class ClickLogger {
   DataStore dataStore;
-  
-  ClickLogger(DataStore dataStore){
-    dataStore = dataStore; 
-  
+
+  ClickLogger(DataStore dataStore) {
+    dataStore = dataStore;
   }
 
-  logSmileyClick(Icon icon){
+  void logSmileyClick(Icon icon) {
     dataStore.put(icon);
   }
 }
 
 class DataStore {
-  DataStore () {
+  String store = 'fake';
+
+  DataStore() {
     //save to firebase
   }
 
-  put(Icon icon){
-    _putInFirebase();  
+  put(Icon icon) {
+    _putInFirebase();
   }
 
-  _putInFirebase(){
-
-  }
+  _putInFirebase() {}
 }
 
 // class MyApp extends StatelessWidget {
