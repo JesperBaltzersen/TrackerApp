@@ -27,13 +27,22 @@ class SmileyPage extends StatefulWidget {
 }
 
 class _SmileyPageState extends State<SmileyPage> {
-  DataStore dataStore;
+  DataStore _dataStore;
   ClickLogger clickLogger;
 
   _SmileyPageState(DataStore dataStore) {
-      dataStore = dataStore;
-      clickLogger = new ClickLogger(dataStore);
+      
+        _dataStore = dataStore;
   }
+
+  @override
+    void initState() {
+      // TODO: implement initState
+      _dataStore = _dataStore;//this commits the field to state
+      clickLogger = new ClickLogger(_dataStore);
+
+      super.initState();
+    }
 
   @override
   Widget build(BuildContext context) {
