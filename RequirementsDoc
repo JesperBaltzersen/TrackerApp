@@ -20,4 +20,7 @@ What I want:
 
 Episode 2.1 
 	Committed variables to state so it is preserved (Datastore and Clicklogger in _SmileyPageState)    
-    
+	
+Next:
+	Inject dependencies into the flutter test
+	    
