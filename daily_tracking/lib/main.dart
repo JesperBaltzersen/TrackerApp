@@ -28,21 +28,27 @@ class SmileyPage extends StatefulWidget {
 
 class _SmileyPageState extends State<SmileyPage> {
   DataStore _dataStore;
-  ClickLogger clickLogger;
+  ClickLogger _clickLogger;
 
   _SmileyPageState(DataStore dataStore) {
-      
         _dataStore = dataStore;
+        _clickLogger = new ClickLogger(_dataStore);
   }
 
   @override
     void initState() {
       // TODO: implement initState
-      _dataStore = _dataStore;//this commits the field to state
-      clickLogger = new ClickLogger(_dataStore);
+      _dataStore = _dataStore; //this commits the field to state
+      _clickLogger = _clickLogger;
 
       super.initState();
     }
+
+  _onPressed(){
+    setState(() {
+          _clickLogger.logSmileyClick(Icon(Icons.sentiment_very_satisfied));
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +57,7 @@ class _SmileyPageState extends State<SmileyPage> {
         child: new ListView(
           children: <Widget>[
             new FlatButton(
-              onPressed: () => clickLogger
-                  .logSmileyClick(Icon(Icons.sentiment_very_satisfied)),
+              onPressed: () => _onPressed(),
               child: new Icon(Icons.sentiment_very_satisfied),
             ),
             new FlatButton(
@@ -75,14 +80,14 @@ class _SmileyPageState extends State<SmileyPage> {
 }
 
 class ClickLogger {
-  DataStore dataStore;
+  DataStore _dataStore;
 
   ClickLogger(DataStore dataStore) {
-    dataStore = dataStore;
+    _dataStore = dataStore;
   }
 
   void logSmileyClick(Icon icon) {
-    dataStore.put(icon);
+    _dataStore.put(icon);
   }
 }
 
@@ -97,7 +102,9 @@ class DataStore {
     _putInFirebase();
   }
 
-  _putInFirebase() {}
+  _putInFirebase() {
+  print('put icon in firebase');
+  }
 }
 
 // class MyApp extends StatelessWidget {

@@ -18,9 +18,14 @@ Missing components:
 What I want:
     better health and much HAPPY:-)
 
-Episode 2.1 
+Episode 2.1 - TDD
+
+Episode 2.2 - Trying to make State work
 	Committed variables to state so it is preserved (Datastore and Clicklogger in _SmileyPageState)    
 	
+Episode 3 - flutter State
+
 Next:
 	Inject dependencies into the flutter test
 	    
+
