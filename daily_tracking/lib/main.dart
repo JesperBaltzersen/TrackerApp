@@ -29,6 +29,13 @@ class SmileyPage extends StatefulWidget {
 class _SmileyPageState extends State<SmileyPage> {
   DataStore _dataStore;
   ClickLogger _clickLogger;
+  Icon _chosenIcon;
+  List<Icon> _icons = [
+    new Icon(Icons.sentiment_very_satisfied),
+    new Icon(Icons.sentiment_satisfied),
+    new Icon(Icons.sentiment_dissatisfied),
+    new Icon(Icons.sentiment_very_dissatisfied),
+  ]; 
 
   _SmileyPageState(DataStore dataStore) {
         _dataStore = dataStore;
@@ -44,11 +51,18 @@ class _SmileyPageState extends State<SmileyPage> {
       super.initState();
     }
 
-  _onPressed(){
+  _onPressed(Icon icon){
     setState(() {
-          _clickLogger.logSmileyClick(Icon(Icons.sentiment_very_satisfied));
+          _chosenIcon = icon;
+          _clickLogger.logSmileyClick(_chosenIcon);
         });
   }
+
+ _onPressedWithoutState(Icon icon){
+   _chosenIcon = icon;
+   _clickLogger.logSmileyClick(_chosenIcon);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -57,21 +71,25 @@ class _SmileyPageState extends State<SmileyPage> {
         child: new ListView(
           children: <Widget>[
             new FlatButton(
-              onPressed: () => _onPressed(),
-              child: new Icon(Icons.sentiment_very_satisfied),
+              onPressed: () => _onPressed(_icons[0]),
+              child: _icons[0],
             ),
             new FlatButton(
-              onPressed: null,
-              child: new Icon(Icons.sentiment_satisfied),
+              
+              onPressed: () => _onPressed(_icons[1]),
+              child: _icons[1],
             ),
             new FlatButton(
-              onPressed: null,
-              child: new Icon(Icons.sentiment_dissatisfied),
+              onPressed: () => _onPressed(_icons[2]),
+              child: _icons[2],
             ),
             new FlatButton(
-              onPressed: null,
-              child: new Icon(Icons.sentiment_very_dissatisfied),
-            )
+              onPressed: () => _onPressed(_icons[3]),
+              child: _icons[3],
+            ),
+            new Center(
+              child: new Text( (_chosenIcon != null) ? _chosenIcon.icon.codePoint.toString() : "na"),//_clickLogger._dataStore._icon != null ? _clickLogger._dataStore._icon.icon.codePoint.toString() : "not quite ready"),//new Text(_dataStore == null ? _dataStore._icon.icon.codePoint.toString() : "not quite ready"),
+              ),
           ],
         ),
       ),
@@ -93,12 +111,13 @@ class ClickLogger {
 
 class DataStore {
   String store = 'fake';
-
+  Icon _icon;
   DataStore() {
     //save to firebase
   }
 
   put(Icon icon) {
+    _icon = icon;
     _putInFirebase();
   }
 
