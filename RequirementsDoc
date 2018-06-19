@@ -25,6 +25,12 @@ Episode 2.2 - Trying to make State work
 	
 Episode 3 - flutter State
 
+Episode 4 - Clean up source
+				delete dead code
+				split in to methods. 
+				split in to multiple files
+			Make sure tests test the right thing
+
 Next:
 	Inject dependencies into the flutter test
 	    
