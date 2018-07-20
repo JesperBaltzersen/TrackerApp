@@ -23,13 +23,18 @@ Episode 2.1 - TDD
 Episode 2.2 - Trying to make State work
 	Committed variables to state so it is preserved (Datastore and Clicklogger in _SmileyPageState)    
 	
-Episode 3 - flutter State
+Episode 3 - flutter State (failed)
 
-Episode 4 - Clean up source
+Episode 4 - Explain state and demo of state
+
+Episode 5 - Clean up source
 				delete dead code
 				split in to methods. 
 				split in to multiple files
 			Make sure tests test the right thing
+
+Episode 6 - Change to Intellij Idea
+            Start integration to Firebase
 
 Next:
 	Inject dependencies into the flutter test

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "978118154068",
+    "firebase_url": "https://trackerapp-flutter-me.firebaseio.com",
+    "project_id": "trackerapp-flutter-me",
+    "storage_bucket": "trackerapp-flutter-me.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:978118154068:android:d0105c9fef83fb7f",
+        "android_client_info": {
+          "package_name": "com.example.dailytracking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "978118154068-h9j7ffh7v2musv58u3mh2jkuqgj6vfn2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbOvPIzMJVDq7wsyq9bgWtQoLQ3oQZ36k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

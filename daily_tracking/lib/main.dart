@@ -31,9 +31,6 @@ class _SmileyPageState extends State<SmileyPage> {
   DataStore _dataStore;
   ClickLogger _clickLogger;
 
-
-
-
   _SmileyPageState(DataStore dataStore) {
         _dataStore = dataStore;
         _clickLogger = new ClickLogger(_dataStore);
@@ -82,7 +79,6 @@ class ClickLogger {
 }
 
 class DataStore {
-  String store = 'fake';
   IconData _icon;
   DataStore() {
     //save to firebase
@@ -94,7 +90,10 @@ class DataStore {
   }
 
   _putInFirebase() {
-  print('put icon in firebase');
+  print('put in firebase');
   }
 }
 
+tracking
+  Document -> typeOfTracking:string
+    Collection -> counter:double timestamp:datetime
